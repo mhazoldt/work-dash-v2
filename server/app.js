@@ -11,7 +11,7 @@ let mongo = require('mongodb')
 let mongoose = require('mongoose')
 let bcrypt = require('bcryptjs')
 let expressValidator = require('express-validator')
-
+let cors = require('cors')
 
 mongoose.connect('mongodb://localhost/workDash2')
 let db = mongoose.connection
@@ -23,9 +23,11 @@ db.once('open', function() {
 })
 
 
+
 var app = express()
 app.use(passportConfig.passport.initialize())
 
+app.use(cors())
 
 app.use(bodyParser.urlencoded({
   extended: true

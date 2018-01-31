@@ -45,6 +45,11 @@ function register(req, res) {
 
     function registerUser(nextId) {
         console.log("-- register user --")
+        console.log(req)
+        console.log("###### REQUEST BODY #######")
+        console.log(req.body)
+        console.log("###### REQUEST BODY USERNAME #######")
+        console.log(req.body['username'])
         let username = req.body.username
         console.log({ username })
         let password = req.body.password
@@ -94,13 +99,15 @@ function login(req, res) {
     var username = req.body.username
     var password = req.body.password
 
+    console.log("got to login")
 
     User.getUserByUsername(username, result)
 
     function result(err, user) {
         if (err) throw err;
         if (user === null) {
-            res.status(401).json({ message: "Unknown User" })
+            // res.status(401).json({ message: "Unknown User" })
+            res.json({ message: "Unknown User" })
         } else {
             User.comparePassword(password, user.password, compareResult)
         }
@@ -111,7 +118,7 @@ function login(req, res) {
         if (isMatch) {
             var payload = { username: username };
             var token = passportConfig.jwt.sign(payload, passportConfig.jwtOptions.secretOrKey)
-            res.json({ message: "ok", token: token })
+            res.json({ message: "ok", token: token, authUsername: username })
         } else {
             res.status(401).json({ message: "Invalid password" })
         }

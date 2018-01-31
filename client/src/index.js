@@ -24,7 +24,9 @@ let initialState = {
         cardCollapse: {}
     },
     baselayout: {
-        isFetching: false
+        isFetching: false,
+        isAuthenticated: false,
+        authUsername: ''
     }
 
 }
