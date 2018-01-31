@@ -1,8 +1,5 @@
-var express = require('express');
-let User = require('../models/user')
-
-let passportConfig = require('../config/passportConfig')
-
+let axios = require('axios');
+var parseString = require('xml2js').parseString;
 
 // endpoint: GET /api
 // request: {}
@@ -15,91 +12,43 @@ function index(req, res) {
 }
 
 
-// endpoint: POST /api/register
+// endpoint: GET /api
 // request: {}
-// response: { "message": "user created" }
+// response: { message: "Express is up!" }
 //           
 //
-// register new user
-function register(req, res) {
-    console.log("-- register user --")
-    let username = req.body.username
-    console.log({ username })
-    let password = req.body.password
+// api index
+function search(req, res) {
+    console.log('got to search')
 
-    let newUser = new User({
-        username: username,
-        password: password
+    console.log(req.query)
+
+    axios.get('https://stackoverflow.com/jobs/feed', {
+        params: req.query
     })
+        .then(function (response) {
+            parseString(response.data, function (err, result) {
+                res.setHeader('Access-Control-Allow-Origin', '*');
+                res.setHeader('Access-Control-Request-Method', '*');
+                res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+                res.setHeader('Access-Control-Allow-Headers', '*');
 
-    User.createUser(newUser, result)
+                res.json(JSON.stringify(result))
 
-    function result(err, user) {
-        if (err) {
-            throw err;
-        } else {
-            console.log(user);
-            let jsonRes = { "message": "user created" }
-            res.json(jsonRes)
-        }
-    }
+            })
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+
 
 }
 
-
-
-// endpoint: POST /api/login
-// request: {username: username, password: password}
-// response: { message: "ok", token: token }
-//
-//
-// user login
-function login(req, res) {
-    var username = req.body.username
-    var password = req.body.password
-
-
-    User.getUserByUsername(username, result)
-
-    function result(err, user) {
-        if (err) throw err;
-        if (user === null) {
-            res.status(401).json({ message: "Unknown User" })
-        } else {
-            User.comparePassword(password, user.password, compareResult)
-        }
-    }
-
-    function compareResult(err, isMatch) {
-        if (err) throw err;
-        if (isMatch) {
-            var payload = { username: username };
-            var token = passportConfig.jwt.sign(payload, passportConfig.jwtOptions.secretOrKey)
-            res.json({ message: "ok", token: token })
-        } else {
-            res.status(401).json({ message: "Invalid password" })
-        }
-    }
-}
-
-
-//////////////////////////////////////////// auth routes
-
-
-// endpoint: GET /api/secret
-// request: {}
-// response: { message: "Success! You can not see this without a token" }
-//
-//
-// route authorization with jwt
-function authRoute(req, res) {
-    res.json({ message: "Success! You can not see this without a token" })
-}
 
 
 module.exports = {
     index,
-    login,
-    authRoute,
-    register
+    search
 }

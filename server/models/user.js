@@ -3,9 +3,15 @@ let mongoose = require('mongoose')
 
 
 let UserSchema = mongoose.Schema({
+    user_id: {
+        type: "number",
+        index: "true",
+        unique: true
+    },
     username: {
         type: "string",
         index: "true",
+        unique: true
 
     },
     password: {

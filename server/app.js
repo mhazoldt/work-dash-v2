@@ -3,6 +3,7 @@ let path = require('path')
 let express = require("express")
 let bodyParser = require("body-parser")
 let apiRoutes = require('./routes/api')
+let userRoutes = require('./routes/user')
 let webRoutes = require('./routes/web')
 let passportConfig = require('./config/passportConfig')
 let flash = require('connect-flash')
@@ -36,6 +37,7 @@ app.use(bodyParser.json())
 /////////// routes
 
 app.use('/api', apiRoutes)
+app.use('/api/user', userRoutes)
 app.use('/', webRoutes)
 
 ///////////// server

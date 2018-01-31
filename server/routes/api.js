@@ -6,12 +6,7 @@ let apiController = require('../controllers/apiController')
 
 
 router.get("/", apiController.index)
-
-router.post("/register", apiController.register)
-
-router.post("/login", apiController.login)
-
-router.get("/secret", passportConfig.passport.authenticate('jwt', { session: false }), apiController.authRoute)
+router.get("/search", apiController.search)
 
 
 module.exports = router

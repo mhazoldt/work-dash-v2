@@ -1,17 +1,19 @@
 {
-    "name": "work-dash-v2",
-    "version": "1.0.0",
-    "main": "app.js",
-    "author": "mhazoldt",
-    "license": "MIT",
-    "dependencies": {
-      "concurrently": "^3.5.0"
-    },
-    "scripts": {
-      "start": "concurrently \"yarn run server\" \"yarn run client\"",
-      "client": "cd client && yarn start",
-      "server": "cd server && yarn start",
-      "build": "cd server/public && rm -rf * && cd ../../client && yarn build",
-      "deploy": "git push heroku master"
-    }
+  "name": "work-dash-v2",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "mhazoldt",
+  "license": "MIT",
+  "dependencies": {
+    "@blueprintjs/core": "^2.0.0-beta.1",
+    "concurrently": "^3.5.0",
+    "react-router": "^4.2.0"
+  },
+  "scripts": {
+    "start": "concurrently \"yarn run server\" \"yarn run client\"",
+    "client": "cd client && yarn start",
+    "server": "cd server && yarn start",
+    "build": "cd server/public && rm -rf * && cd ../../client && yarn build",
+    "deploy": "git push heroku master"
   }
+}
