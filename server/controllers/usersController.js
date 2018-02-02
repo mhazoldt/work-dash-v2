@@ -27,7 +27,7 @@ function register(req, res) {
 
     let incrementorExists = shouldCreateIncrementor('users')
     console.log("-- incrementor exists --", incrementorExists)
-    if (incrementorExists === false) {
+    if (incrementorExists === false || incrementorExists === undefined ) {
         console.log("trying to create incrementor")
         let newIncrementor = new Incrementor({
             collection_name: 'users',
