@@ -26,8 +26,9 @@ function register(req, res) {
 
 
     let incrementorExists = shouldCreateIncrementor('users')
-
+    console.log("-- incrementor exists --", incrementorExists)
     if (incrementorExists === false) {
+        console.log("trying to create incrementor")
         let newIncrementor = new Incrementor({
             collection_name: 'users',
             last_id: 0
@@ -36,6 +37,7 @@ function register(req, res) {
         Incrementor.createIncrementor(newIncrementor, getNextId)
         console.log('INCREMENTOR CREATED')
     } else {
+        console.log("trying to get next id for user")
         getNextId()
     }
 
