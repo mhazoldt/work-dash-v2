@@ -12,7 +12,7 @@
   "scripts": {
     "start": "concurrently \"yarn run server\" \"yarn run client\"",
     "client": "cd client && yarn start",
-    "server": "cd server && yarn start",
+    "server": "cd server && yarn start-node",
     "build": "cd server/public && rm -rf * && cd ../../client && yarn build",
     "deploy": "git push heroku master"
   }
