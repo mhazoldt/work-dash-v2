@@ -13,7 +13,7 @@ let expressValidator = require('express-validator')
 let cors = require('cors')
 
 
-mongoose.connect('mongodb://localhost/workDash2')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workDash2')
 let db = mongoose.connection
 
 db.on('error', console.error.bind(console, 'connection error:'))
