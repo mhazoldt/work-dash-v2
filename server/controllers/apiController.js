@@ -58,6 +58,7 @@ function search(req, res) {
 //
 // api index
 function saveJob(req, res) {
+    console.log('------------ got to save job ---------------')
     let authHeader = req.headers.authorization
     let token = authHeader.substr(4)
     console.log(token)
@@ -71,7 +72,7 @@ function saveJob(req, res) {
 
 
         let jobPostReq = req.body.jobPost
-        console.log('jobPostReq', jobPostReq)
+        console.log('------- JOB POST TO SAVE -----', jobPostReq)
         jobPostReq.username = username
         let newJobPost = new JobPost(jobPostReq)
 
@@ -94,7 +95,7 @@ function saveJob(req, res) {
 
 
     });
-    console.log('------------ got to save job ---------------')
+    
 
 
 

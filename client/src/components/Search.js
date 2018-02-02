@@ -61,6 +61,7 @@ class Search extends Component {
                 let guid = result.guid[0]['_']
                 let title = result.title
                 let postDate = result.pubDate
+                let link = result.link
                 
                 card['updated'] = updated
                 card['author'] = author
@@ -70,6 +71,7 @@ class Search extends Component {
                 card['title'] = title
                 card['postDate'] = postDate
                 card['location'] = location
+                card['link'] = link
 
                 total[guid] = card
 

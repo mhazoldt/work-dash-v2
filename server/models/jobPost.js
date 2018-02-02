@@ -29,6 +29,9 @@ let JobPostSchema = mongoose.Schema({
     location: {
         type: "string"
     },
+    link: {
+        type: "string"
+    },
     applied: {
         type: Boolean
     },

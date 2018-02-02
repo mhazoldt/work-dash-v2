@@ -1,0 +1,27 @@
+{
+    "_id": ObjectId("5a73da93ae561d292c294415"),
+    "updated": "2018-01-22T15:35:39Z",
+    "guid": "108308",
+    "title": "Senior Software Engineer at AlphaSights (London, UK) (allows remote)",
+    "postDate": "Mon, 22 Jan 2018 15:35:39 Z",
+    "location": "London, UK",
+    "applied": false,
+    "response": false,
+    "interviewed": false,
+    "notes": "",
+    "username": "asdf",
+    "description": [
+        "<p>As a member of the Business Core team, you will build usable software that supercharges our employees in their everyday work. We practice test driven development, continuous integration &amp; deployment, and pair programming.</p><br /><p>As a Software Engineer at AlphaSights you will:</p><br /><ul><br /><li>Write high quality and maintainable code.</li><br /><li>Understand all other functions of AlphaSights to build software to meet the needs of our growing business.</li><br /><li>Work in a collaborative project team be part of iteration planning and retros.</li><br /><li>Pair with teammates, review PRs, help others with technical questions &amp; share your learnings.</li><br /><li>Learn to master a specific part of the stack, e.g., UI/UX, microservices, DevOps, etc. with the opportunity to take on product and/or technical leadership over time.</li><br /></ul><br /><p><strong>What We're Looking For</strong></p><br /><p>At AlphaSights, we value diversity and individuality. Drawing on a range of experiences and perspectives better equips us to solve challenging problems. We believe you&rsquo;ll be successful in this role if you:</p><br /><ul><br /><li>Have 4+ years of experience developing web applications and/or programming with languages similar to Ruby, Javascript, Python, etc.</li><br /><li>Are able to understand difficult technical problems and develop end to end solutions.</li><br /><li>Enjoy collaborating and making teammates better by teaching and mentoring.</li><br /><li>Have excellent communications skills and are fluent in English.</li><br /><li>Take responsibility for leaving things in better shape than you found them.</li><br /></ul><br /><p>If you don&rsquo;t meet these exact requirements, but feel like you have qualities and experiences commensurate with the above, feel free to apply below.</p>"
+    ],
+    "category": [
+        "postgresql",
+        "ruby-on-rails",
+        "javascript",
+        "python",
+        "ruby"
+    ],
+    "author": [
+        "AlphaSights"
+    ],
+    "__v": 0
+}

@@ -140,6 +140,7 @@ class SavedCard extends Component {
         let guid = this.props.data.guid
         let title = this.props.data.title
         let postDate = this.props.data.postDate
+        let link = this.props.data.link
         let tags
 
         if (this.props.data.category) {
@@ -163,7 +164,7 @@ class SavedCard extends Component {
 
 
                 <div style={flexStyle}>
-                    <h5 style={{ display: 'inline-block' }}>#{guid}: {title}</h5>
+                <a href={link} target="blank"><h5 style={{ display: 'inline-block' }}>#{guid}: {title}</h5></a>
 
                     <div>{postDate}</div>
                 </div>
