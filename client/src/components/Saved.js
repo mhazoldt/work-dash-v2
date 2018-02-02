@@ -52,7 +52,7 @@ class Saved extends Component {
 
         axios.defaults.headers.common['Authorization'] = `JWT ${this.props.token}`
 
-        axios.get('http://localhost:3001/api/listjobs')
+        axios.get('/api/listjobs')
         .then(function (response) {
             console.log('-- got response list jobs --')
             console.log(response)

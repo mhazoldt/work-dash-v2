@@ -44,7 +44,7 @@ function workSearch(query, location, distance) {
 
 
 
-        axios.get('http://localhost:3001/api/search', {
+        axios.get('/api/search', {
             params: {
                 q: query,
                 l: location,

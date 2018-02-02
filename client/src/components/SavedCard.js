@@ -17,7 +17,7 @@ class SavedCard extends Component {
 
         axios.defaults.headers.common['Authorization'] = `JWT ${this.props.token}`;
 
-        axios.post('http://localhost:3001/api/removejobpost', {
+        axios.post('/api/removejobpost', {
             guid: guid
         })
             .then(function (response) {
@@ -56,7 +56,7 @@ class SavedCard extends Component {
 
         axios.defaults.headers.common['Authorization'] = `JWT ${this.props.token}`;
 
-        axios.post('http://localhost:3001/api/editjobpost', {
+        axios.post('/api/editjobpost', {
             jobPost: jobPost
         })
         .then(function (response) {
@@ -95,7 +95,7 @@ class SavedCard extends Component {
 
         axios.defaults.headers.common['Authorization'] = `JWT ${this.props.token}`;
 
-        axios.post('http://localhost:3001/api/editjobpost', {
+        axios.post('/api/editjobpost', {
             jobPost: jobPost
         })
         .then(function (response) {

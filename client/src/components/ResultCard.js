@@ -24,7 +24,7 @@ class ResultCard extends Component {
 
         axios.defaults.headers.common['Authorization'] = `JWT ${this.props.token}`;
 
-        axios.post('http://localhost:3001/api/savejob', {
+        axios.post('/api/savejob', {
             jobPost: jobPost
         })
             .then(function (response) {
@@ -49,7 +49,7 @@ class ResultCard extends Component {
 
         axios.defaults.headers.common['Authorization'] = `JWT ${this.props.token}`;
 
-        axios.post('http://localhost:3001/api/removejobpost', {
+        axios.post('/api/removejobpost', {
             guid: guid
         })
             .then(function (response) {

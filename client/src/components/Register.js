@@ -48,7 +48,7 @@ class Register extends Component {
                 isFetching: true
             })
 
-            axios.post('http://localhost:3001/api/user/register', {
+            axios.post('/api/user/register', {
                 username: username,
                 password: password
 

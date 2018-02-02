@@ -44,7 +44,7 @@ class Login extends Component {
         function makeRequest() {
 
 
-            axios.post('http://localhost:3001/api/user/login', {
+            axios.post('/api/user/login', {
                 username: username,
                 password: password
 
