@@ -1,16 +1,14 @@
+let path = require('path')
 
 
-// endpoint: GET /
-// request: {}
-// response: { message: "Express is up!" }
-//           
-//
-// web index
-function index(req, res) {
-    res.json({ message: "Express is up!" })
+
+function DEPLOY_REACT(req, res) {
+    
+    res.sendFile(path.resolve(__dirname, '../public/index.html'))
+
 }
 
 
 module.exports = {
-    index
+    DEPLOY_REACT
 }

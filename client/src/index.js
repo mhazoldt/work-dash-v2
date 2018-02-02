@@ -21,12 +21,22 @@ let initialState = {
         distance: "20",
         tags: null,
         searchResults: '',
-        cardCollapse: {}
+        cardCollapse: {},
+        cardJson: {},
+        needsUpdate: false
     },
     baselayout: {
         isFetching: false,
         isAuthenticated: false,
-        authUsername: ''
+        authUsername: '',
+        token: ''
+    },
+    saved: {
+        isFetching: false,
+        cardJson: [],
+        cardJsx: null,
+        cardCollapse: {},
+        needsUpdate: false
     }
 
 }

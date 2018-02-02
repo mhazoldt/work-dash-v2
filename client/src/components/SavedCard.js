@@ -3,42 +3,10 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import axios from 'axios';
 
-import { setReduxState } from '../redux/search/actionCreators'
 import { setReduxStateSaved } from '../redux/saved/actionCreators'
+import { setReduxState } from '../redux/search/actionCreators'
 
-
-class ResultCard extends Component {
-
-    saveJobPost = (e) => {
-
-        let that = this
-
-        let guid = e.currentTarget.dataset.cardId
-        let jobPost = this.props.cardJson[guid]
-
-        jobPost.applied = false
-        jobPost.response = false
-        jobPost.interviewed = false
-        jobPost.notes = ''
-
-
-        axios.defaults.headers.common['Authorization'] = `JWT ${this.props.token}`;
-
-        axios.post('http://localhost:3001/api/savejob', {
-            jobPost: jobPost
-        })
-            .then(function (response) {
-                
-                console.log('--got response--')
-                console.log(response)
-                that.props.dispatch(setReduxStateSaved({ needsUpdate: true }))
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-    }
+class SavedCard extends Component {
 
 
     removeJobPost = (e) => {
@@ -65,6 +33,83 @@ class ResultCard extends Component {
 
     }
 
+    editJobPostCheckbox = (e) => {
+
+        let that = this
+
+        let guid = e.currentTarget.dataset.cardId
+        let jobPosts = this.props.cardJson
+        let checkbox = e.currentTarget.name
+
+        let jobPost = jobPosts.reduce((total, post) => {
+            if(post.guid === guid) {
+                return post
+            } else {
+                return total
+            }
+
+        }, {})
+
+        jobPost[checkbox] = !(jobPost[checkbox])
+
+
+
+        axios.defaults.headers.common['Authorization'] = `JWT ${this.props.token}`;
+
+        axios.post('http://localhost:3001/api/editjobpost', {
+            jobPost: jobPost
+        })
+        .then(function (response) {
+
+            console.log('--got response--')
+            console.log(response)
+            that.props.dispatch(setReduxStateSaved({ needsUpdate: true }))
+
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+
+    }
+
+
+    editJobPostNotes = (e) => {
+
+        let that = this
+
+        let guid = e.currentTarget.dataset.cardId
+        let jobPosts = this.props.cardJson
+        let checkbox = e.currentTarget.name
+
+        let jobPost = jobPosts.reduce((total, post) => {
+            if(post.guid === guid) {
+                return post
+            } else {
+                return total
+            }
+
+        }, {})
+        console.log(e.currentTarget.value)
+        jobPost.notes = e.currentTarget.value
+
+
+        axios.defaults.headers.common['Authorization'] = `JWT ${this.props.token}`;
+
+        axios.post('http://localhost:3001/api/editjobpost', {
+            jobPost: jobPost
+        })
+        .then(function (response) {
+
+            console.log('--got response--')
+            console.log(response)
+            that.props.dispatch(setReduxStateSaved({ needsUpdate: true }))
+
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+
+    }
 
 
     cardCollapse = (e) => {
@@ -77,20 +122,8 @@ class ResultCard extends Component {
         })
 
 
-        this.props.dispatch(setReduxState({ cardCollapse: cardState }))
+        this.props.dispatch(setReduxStateSaved({ cardCollapse: cardState }))
 
-    }
-
-    isJobPostSaved = (savedCardJson, guid) => {
-        let jobPostSaved = false
-
-        savedCardJson.forEach((savedJobPost) => {
-            if(savedJobPost.guid === guid) {
-                jobPostSaved = true
-            }
-        })
-
-        return jobPostSaved
     }
 
 
@@ -115,21 +148,15 @@ class ResultCard extends Component {
             })
         }
 
+        let applied = this.props.data.applied
+        let response = this.props.data.response
+        let interviewed = this.props.data.interviewed
+        let notes = this.props.data.notes
+
         let collapse = this.props.cardCollapse[guid]
 
-        let jobPostSaved = this.isJobPostSaved(this.props.savedCardJson, guid)
-
-
         let flexStyle = { display: 'flex', justifyContent: 'space-between', width: '100%' }
-
-        let saveOrRemoveButton
-
-        if(jobPostSaved) {
-            saveOrRemoveButton = (<button className='pt-button pt-icon-remove' onClick={this.removeJobPost} data-card-id={guid}>Remove</button>)
-        } else {
-            saveOrRemoveButton = (<button className='pt-button pt-icon-add pt-intent-success' onClick={this.saveJobPost} data-card-id={guid}>Save</button>)
-        }
-
+        let flexStyleCheckbox = { display: 'flex', width: '100%' }
         return (
             <div className="pt-card pt-elevation-2 mt-4 hoverable animated bounceInUp">
 
@@ -187,11 +214,33 @@ class ResultCard extends Component {
 
                     <div>
                         {this.props.isAuthenticated &&
-                            saveOrRemoveButton
+                            <button className='pt-button pt-icon-remove' onClick={this.removeJobPost} data-card-id={guid}>Remove</button>
                         }
 
                     </div>
 
+                </div>
+
+                <div style={flexStyleCheckbox}>
+                    <label class="pt-control pt-checkbox pt-large pr-3"  >
+                        <input type="checkbox" name="applied" onClick={this.editJobPostCheckbox} data-card-id={guid} checked={applied} />
+                        <span class="pt-control-indicator"></span>
+                        Applied
+                    </label>
+                    <label class="pt-control pt-checkbox pt-large pr-3">
+                        <input type="checkbox" name="response" onClick={this.editJobPostCheckbox} data-card-id={guid} checked={response} />
+                        <span class="pt-control-indicator"></span>
+                        Response
+                    </label>
+                    <label class="pt-control pt-checkbox pt-large pr-3">
+                        <input type="checkbox" name="interviewed" onClick={this.editJobPostCheckbox} data-card-id={guid} checked={interviewed} />
+                        <span class="pt-control-indicator"></span>
+                        Interviewed
+                    </label>
+                </div>
+                <h6>Notes: </h6>
+                <div>
+                    <textarea class="pt-input pt-fill" name="notes" onBlur={this.editJobPostNotes} data-card-id={guid} dir="auto">{notes}</textarea>
                 </div>
 
             </div>
@@ -203,14 +252,13 @@ class ResultCard extends Component {
 
 function mapStateToProps(appState) {
     return {
-        cardCollapse: appState.search.cardCollapse,
+        cardCollapse: appState.saved.cardCollapse,
         isAuthenticated: appState.baselayout.isAuthenticated,
-        cardJson: appState.search.cardJson,
-        token: appState.baselayout.token,
-        savedCardJson: appState.saved.cardJson
+        cardJson: appState.saved.cardJson,
+        token: appState.baselayout.token
 
     }
 }
 
 
-export default withRouter(connect(mapStateToProps)(ResultCard))
+export default withRouter(connect(mapStateToProps)(SavedCard))

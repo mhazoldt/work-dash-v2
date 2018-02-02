@@ -1,8 +1,7 @@
 
-
-function baselayout(state = [], action) {
+function saved(state = [], action) {
     switch (action.type) {
-        case 'SET_STATE_BASE': {
+        case 'SET_STATE_SAVED': {
             let newState = Object.assign({}, state, action.rState)
             
             return newState
@@ -16,4 +15,4 @@ function baselayout(state = [], action) {
 }
 
 
-export default baselayout
+export default saved

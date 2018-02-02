@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+
 
 import axios from 'axios'
 import { Toaster, Position, Intent } from "@blueprintjs/core";
@@ -27,16 +27,16 @@ class Register extends Component {
         let passwordNotBlank = (password.length > 0)
         let usernameNotBlank = (username.length > 0)
 
-        if(!passwordsMatch) {
+        if (!passwordsMatch) {
             that.makeToaster('Passwords do not match', Intent.WARNING)
-    
+
         } else if (!passwordNotBlank) {
             that.makeToaster('Password can not be blank', Intent.WARNING)
 
         } else if (!usernameNotBlank) {
             that.makeToaster('Username can not be blank', Intent.WARNING)
 
-        } else if(passwordsMatch && passwordNotBlank && usernameNotBlank) {
+        } else if (passwordsMatch && passwordNotBlank && usernameNotBlank) {
             makeRequest()
         }
 
@@ -47,29 +47,29 @@ class Register extends Component {
                 passwordConfirm: '',
                 isFetching: true
             })
-    
+
             axios.post('http://localhost:3001/api/user/register', {
                 username: username,
                 password: password
-                
+
             })
-            .then(function (response) {
-                that.setState({
-                    isFetching: false
+                .then(function (response) {
+                    that.setState({
+                        isFetching: false
+                    })
+                    console.log('--got response--')
+                    if (response.data.message === 'user created') {
+                        that.makeToaster('User Created!', Intent.SUCCESS)
+                    } else if (response.data.message === 'duplicate username') {
+                        that.makeToaster('Username Unavailable', Intent.DANGER)
+
+                    }
+                    console.log(response)
+
                 })
-                console.log('--got response--')
-                if(response.data.message === 'user created') {
-                    that.makeToaster('User Created!', Intent.SUCCESS)
-                } else if(response.data.message === 'duplicate username') {
-                    that.makeToaster('Username Unavailable', Intent.DANGER)
-    
-                }
-                console.log(response)
-    
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     }
 
@@ -93,8 +93,8 @@ class Register extends Component {
 
     makeToaster = (message, intent) => {
         console.log('tried to make toaster')
-        let newToster = Toaster.create({position: Position.TOP,  }, document.body)
-        newToster.show({message: message, className: "pt-intent-primary mx-auto", intent: intent})
+        let newToster = Toaster.create({ position: Position.TOP, }, document.body)
+        newToster.show({ message: message, className: "pt-intent-primary mx-auto", intent: intent })
     }
 
     render() {

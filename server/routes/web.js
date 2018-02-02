@@ -5,7 +5,7 @@ var path = require('path')
 let webController = require('../controllers/webController')
 
 
-router.get('/', webController.index)
+router.get('/', webController.DEPLOY_REACT)
 
 
 module.exports = router

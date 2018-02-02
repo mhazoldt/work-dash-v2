@@ -6,7 +6,6 @@ let apiRoutes = require('./routes/api')
 let userRoutes = require('./routes/user')
 let webRoutes = require('./routes/web')
 let passportConfig = require('./config/passportConfig')
-let flash = require('connect-flash')
 let mongo = require('mongodb')
 let mongoose = require('mongoose')
 let bcrypt = require('bcryptjs')
@@ -26,7 +25,7 @@ db.once('open', function() {
 
 var app = express()
 app.use(passportConfig.passport.initialize())
-
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(cors())
 
 app.use(bodyParser.urlencoded({
