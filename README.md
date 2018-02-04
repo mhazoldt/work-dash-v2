@@ -3,6 +3,8 @@ This is a rewrite of my final project from The Iron Yard. The project was to mak
 
 This is a full stack MERN appilcation (Mongo Express React Node)
 
+The search data is from StackOverflow jobs as an RSS feed.
+
 
 ## Libraries Used
 
